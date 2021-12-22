@@ -129,4 +129,25 @@ public class Arrays {
         return false;
     }
 
+    /**
+     * A cryptarithm is a mathematical puzzle for which the goal is to find the correspondence between letters and
+     * digits, such that the given arithmetic equation consisting of letters holds true when the letters are converted
+     * to digits.
+     * <p>
+     * You have an array of strings crypt, the cryptarithm, and an an array containing the mapping of letters and
+     * digits, solution. The array crypt will contain three non-empty strings that follow the
+     * structure: [word1, word2, word3], which should be interpreted as the word1 + word2 = word3 cryptarithm.
+     *
+     * @param crypt    An array of three non-empty strings containing only uppercase English letters.
+     * @param solution An array consisting of pairs of characters that represent the correspondence between letters and
+     *                 numbers in the cryptarithm. The first character in the pair is an uppercase English letter, and
+     *                 the second one is a digit in the range from 0 to 9.
+     *                 <p>
+     *                 It is guaranteed that solution only contains entries for the letters present in crypt and that
+     *                 different letters have different values.
+     * @return Return true if the solution represents the correct solution to the cryptarithm crypt, otherwise return false.
+     */
+    public static boolean isCryptSolution(String[] crypt, char[][] solution) {
+        return false;
+    }
 }

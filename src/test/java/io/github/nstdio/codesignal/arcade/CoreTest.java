@@ -1,12 +1,12 @@
 package io.github.nstdio.codesignal.arcade;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.Test;
 
-import org.junit.Test;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class CoreTest {
     @Test
-    public void addTwoDigits() throws Exception {
+    void addTwoDigits() {
         assertThat(Core.addTwoDigits(12)).isEqualTo(3);
         assertThat(Core.addTwoDigits(29)).isEqualTo(11);
         assertThat(Core.addTwoDigits(48)).isEqualTo(12);
@@ -16,7 +16,7 @@ public class CoreTest {
     }
 
     @Test
-    public void largestNumber() throws Exception {
+    void largestNumber() {
         assertThat(Core.largestNumber(1)).isEqualTo(9);
         assertThat(Core.largestNumber(2)).isEqualTo(99);
         assertThat(Core.largestNumber(4)).isEqualTo(9999);
@@ -24,7 +24,7 @@ public class CoreTest {
     }
 
     @Test
-    public void candies() throws Exception {
+    void candies() {
         assertThat(Core.candies(3, 10)).isEqualTo(9);
         assertThat(Core.candies(1, 2)).isEqualTo(2);
         assertThat(Core.candies(1, 5)).isEqualTo(5);
@@ -35,14 +35,14 @@ public class CoreTest {
     }
 
     @Test
-    public void seatsInTheater() throws Exception {
+    void seatsInTheater() {
         assertThat(Core.seatsInTheater(16, 11, 5, 3)).isEqualTo(96);
         assertThat(Core.seatsInTheater(1, 1, 1, 1)).isEqualTo(0);
         assertThat(Core.seatsInTheater(1000, 1000, 1000, 1000)).isEqualTo(0);
     }
 
     @Test
-    public void maxMultiple() throws Exception {
+    void maxMultiple() {
         assertThat(Core.maxMultiple(3, 10)).isEqualTo(9);
         assertThat(Core.maxMultiple(2, 7)).isEqualTo(6);
         assertThat(Core.maxMultiple(10, 50)).isEqualTo(50);
@@ -50,7 +50,7 @@ public class CoreTest {
     }
 
     @Test
-    public void almostIncreasingSequenceTest() {
+    void almostIncreasingSequenceTest() {
         assertThat(Core.almostIncreasingSequence(new int[]{1, 2, 3, 1})).isEqualTo(true);
         assertThat(Core.almostIncreasingSequence(new int[]{1, 2, 3, 4, 3, 6})).isEqualTo(true);
         assertThat(Core.almostIncreasingSequence(new int[]{1, 2, 3, 4, 99, 5, 6})).isEqualTo(true);
@@ -66,7 +66,7 @@ public class CoreTest {
     }
 
     @Test
-    public void matrixElementsSumTest() {
+    void matrixElementsSumTest() {
         assertThat(Core.matrixElementsSum(new int[][]{{0, 1, 1, 2}, {0, 5, 0, 0}, {2, 0, 3, 3}})).isEqualTo(9);
         assertThat(Core.matrixElementsSum(new int[][]{{1, 1, 1}, {0, 5, 0, 1}, {2, 1, 3, 10}})).isEqualTo(9);
         assertThat(Core.matrixElementsSum(new int[][]{{1, 1, 1}, {2, 2, 2}, {3, 3, 3}})).isEqualTo(18);
@@ -78,13 +78,13 @@ public class CoreTest {
     }
 
     @Test
-    public void allLongestStringsTest() {
+    void allLongestStringsTest() {
         assertThat(Core.allLongestStrings(new String[]{"aba", "aa", "ad", "vcd", "aba"})).isEqualTo(new String[]{"aba", "vcd", "aba"});
         assertThat(Core.allLongestStrings(new String[]{"aa"})).isEqualTo(new String[]{"aa"});
     }
 
     @Test
-    public void commonCharacterCount() {
+    void commonCharacterCount() {
         assertThat(Core.commonCharacterCount("zzzz", "zzzzzzz")).isEqualTo(4);
         assertThat(Core.commonCharacterCount("aabcc", "adcaa")).isEqualTo(3);
         assertThat(Core.commonCharacterCount("abca", "xyzbac")).isEqualTo(3);
@@ -93,7 +93,7 @@ public class CoreTest {
     }
 
     @Test
-    public void isLucky() {
+    void isLucky() {
         assertThat(Core.isLucky(1230)).isEqualTo(true);
         assertThat(Core.isLucky(239017)).isEqualTo(false);
         assertThat(Core.isLucky(134008)).isEqualTo(true);
@@ -107,7 +107,7 @@ public class CoreTest {
     }
 
     @Test
-    public void sortByHeight() {
+    void sortByHeight() {
         assertThat(Core.sortByHeight(-1, 150, 190, 170, -1, -1, 160, 180))
                 .containsExactly(-1, 150, 160, 170, -1, -1, 180, 190);
 
@@ -125,7 +125,7 @@ public class CoreTest {
     }
 
     @Test
-    public void reverseInParentheses() {
+    void reverseInParentheses() {
         assertThat(Core.reverseInParentheses("foo(bar(baz))blim"))
                 .isEqualTo("foobazrabblim");
 
@@ -161,15 +161,15 @@ public class CoreTest {
     }
 
     @Test
-    public void alternatingSums() {
+    void alternatingSums() {
     }
 
     @Test
-    public void addBorder() {
+    void addBorder() {
     }
 
     @Test
-    public void areSimilar() {
+    void areSimilar() {
         assertThat(Core.areSimilar(new int[]{1, 2, 2}, new int[]{2, 1, 1})).isFalse();
         assertThat(Core.areSimilar(new int[]{1, 1, 4}, new int[]{1, 2, 3})).isFalse();
         assertThat(Core.areSimilar(new int[]{1, 2, 3}, new int[]{1, 10, 2})).isFalse();
@@ -183,7 +183,7 @@ public class CoreTest {
     }
 
     @Test
-    public void arrayChange() {
+    void arrayChange() {
         assertThat(Core.arrayChange(2, 3, 3, 5, 5, 5, 4, 12, 12, 10, 15)).isEqualTo(13);
         assertThat(Core.arrayChange(1, 1, 1)).isEqualTo(3);
         assertThat(Core.arrayChange(2, 1, 10, 1)).isEqualTo(12);
@@ -197,7 +197,7 @@ public class CoreTest {
     }
 
     @Test
-    public void palindromeRearranging() {
+    void palindromeRearranging() {
         assertThat(Core.palindromeRearranging("aabb")).isTrue();
         assertThat(Core.palindromeRearranging("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaabc")).isFalse();
         assertThat(Core.palindromeRearranging("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaab")).isTrue();
@@ -214,16 +214,16 @@ public class CoreTest {
     }
 
     @Test
-    public void areEquallyStrong() {
+    void areEquallyStrong() {
         assertThat(Core.areEquallyStrong(15, 10, 15, 9)).isFalse();
     }
 
     @Test
-    public void arrayMaximalAdjacentDifference() {
+    void arrayMaximalAdjacentDifference() {
     }
 
     @Test
-    public void isIPv4Address() {
+    void isIPv4Address() {
         assertThat(Core.isIPv4Address("172.16.254.1")).isTrue();
         assertThat(Core.isIPv4Address("172.316.254.1")).isFalse();
         assertThat(Core.isIPv4Address(".254.255.0")).isFalse();
@@ -231,7 +231,7 @@ public class CoreTest {
     }
 
     @Test
-    public void avoidObstacles() {
+    void avoidObstacles() {
         assertThat(Core.avoidObstacles(new int[]{2, 3})).isEqualTo(4);
         assertThat(Core.avoidObstacles(new int[]{1000, 999})).isEqualTo(6);
         assertThat(Core.avoidObstacles(new int[]{5, 3, 6, 7, 9})).isEqualTo(4);
