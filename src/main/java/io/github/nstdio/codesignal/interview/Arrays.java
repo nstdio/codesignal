@@ -2,6 +2,12 @@ package io.github.nstdio.codesignal.interview;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.stream.Stream;
+
+import static java.lang.Character.digit;
+import static java.util.Map.entry;
+import static java.util.stream.Collectors.toMap;
 
 public class Arrays {
     /**
@@ -18,7 +24,7 @@ public class Arrays {
             occurrence.compute(s.charAt(i), (c, f) -> f == null ? 1 : ++f);
         }
 
-        for (Map.Entry<Character, Integer> e : occurrence.entrySet()) {
+        for (Entry<Character, Integer> e : occurrence.entrySet()) {
             if (e.getValue() == 1)
                 return e.getKey();
         }
@@ -63,7 +69,8 @@ public class Arrays {
      * according to the layout rules described above. Note that the puzzle represented by grid does not have to be
      * solvable.
      *
-     * @param grid A 9 × 9 array of characters, in which each character is either a digit from '1' to '9' or a period '.'.
+     * @param grid A 9 × 9 array of characters, in which each character is either a digit from '1' to '9' or a period
+     *             '.'.
      * @return Return true if grid represents a valid Sudoku puzzle, otherwise return false.
      */
     public static boolean sudoku2(char[][] grid) {
@@ -135,8 +142,8 @@ public class Arrays {
      * to digits.
      * <p>
      * You have an array of strings crypt, the cryptarithm, and an an array containing the mapping of letters and
-     * digits, solution. The array crypt will contain three non-empty strings that follow the
-     * structure: [word1, word2, word3], which should be interpreted as the word1 + word2 = word3 cryptarithm.
+     * digits, solution. The array crypt will contain three non-empty strings that follow the structure: [word1, word2,
+     * word3], which should be interpreted as the word1 + word2 = word3 cryptarithm.
      *
      * @param crypt    An array of three non-empty strings containing only uppercase English letters.
      * @param solution An array consisting of pairs of characters that represent the correspondence between letters and
@@ -145,9 +152,28 @@ public class Arrays {
      *                 <p>
      *                 It is guaranteed that solution only contains entries for the letters present in crypt and that
      *                 different letters have different values.
-     * @return Return true if the solution represents the correct solution to the cryptarithm crypt, otherwise return false.
+     * @return Return true if the solution represents the correct solution to the cryptarithm crypt, otherwise return
+     * false.
      */
     public static boolean isCryptSolution(String[] crypt, char[][] solution) {
-        return false;
+        var mapping = Stream.of(solution)
+                .map(chars -> entry(chars[0], digit(chars[1], 10)))
+                .collect(toMap(Entry::getKey, Entry::getValue));
+
+        return toCryptDigit(mapping, crypt[0]) + toCryptDigit(mapping, crypt[1]) == toCryptDigit(mapping, crypt[2]);
+    }
+
+    private static int toCryptDigit(Map<Character, Integer> mapping, String crypt) {
+        if (mapping.get(crypt.charAt(0)) == 0 && crypt.length() > 1) {
+            return Integer.MIN_VALUE;
+        }
+
+        int x = 0;
+        for (int i = 0; i < crypt.length(); i++) {
+            x *= 10;
+            x += mapping.get(crypt.charAt(i));
+        }
+
+        return x;
     }
 }

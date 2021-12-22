@@ -1,13 +1,72 @@
 package io.github.nstdio.codesignal.interview;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import java.util.stream.Stream;
 
 import static io.github.nstdio.codesignal.interview.Arrays.firstNotRepeatingCharacter;
 import static io.github.nstdio.codesignal.interview.Arrays.rotateImage;
 import static io.github.nstdio.codesignal.interview.Arrays.sudoku2;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 public class ArraysTest {
+
+    static Stream<Arguments> isCryptSolutionPositiveData() {
+        return Stream.of(
+                arguments(new String[]{"ONE", "ONE", "TWO"},
+                        new char[][]{
+                                {'O', '2'},
+                                {'T', '4'},
+                                {'W', '6'},
+                                {'E', '1'},
+                                {'N', '3'}}
+                ),
+                arguments(new String[]{"A", "A", "A"},
+                        new char[][]{
+                                {'A', '0'}}
+                )
+        );
+    }
+
+    static Stream<Arguments> isCryptSolutionNegativeData() {
+        return Stream.of(
+                arguments(new String[]{"ONE", "ONE", "TWO"},
+                        new char[][]{
+                                {'O', '0'},
+                                {'T', '1'},
+                                {'W', '2'},
+                                {'E', '5'},
+                                {'N', '6'}}
+                ),
+                arguments(new String[]{"A", "B", "C"},
+                        new char[][]{
+                                {'A', '5'},
+                                {'B', '6'},
+                                {'C', '1'}}
+                ),
+                arguments(new String[]{"TEN", "TWO", "ONE"},
+                        new char[][]{
+                                {'O', '1'},
+                                {'T', '0'},
+                                {'W', '9'},
+                                {'E', '5'},
+                                {'N', '4'}}
+                ),
+                arguments(new String[]{"BAA", "CAB", "DAB"},
+                        new char[][]{
+                                {'A', '0'},
+                                {'B', '1'},
+                                {'C', '2'},
+                                {'D', '4'}}
+                )
+        );
+    }
 
     @Test
     void testFirstNotRepeatingCharacter() {
@@ -121,5 +180,25 @@ public class ArraysTest {
                 {'.', '.', '.', '.', '.', '7', '.', '.', '.'},
                 {'.', '.', '.', '5', '.', '.', '.', '7', '.'}
         })).isFalse();
+    }
+
+    @ParameterizedTest
+    @MethodSource("isCryptSolutionPositiveData")
+    void testIsCryptSolutionPositive(String[] crypt, char[][] solution) {
+        //when
+        var actual = Arrays.isCryptSolution(crypt, solution);
+
+        //then
+        assertTrue(actual);
+    }
+
+    @ParameterizedTest
+    @MethodSource("isCryptSolutionNegativeData")
+    void testIsCryptSolutionNegative(String[] crypt, char[][] solution) {
+        //when
+        var actual = Arrays.isCryptSolution(crypt, solution);
+
+        //then
+        assertFalse(actual);
     }
 }
