@@ -10,6 +10,7 @@ import java.util.stream.Stream;
 
 import static io.github.nstdio.codesignal.Sort.bubbleSort;
 import static io.github.nstdio.codesignal.Sort.insertionSort;
+import static io.github.nstdio.codesignal.Sort.mergeSort;
 import static io.github.nstdio.codesignal.Sort.selectionSort;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
@@ -26,7 +27,7 @@ class SortTest {
                 new ArrayList<>()
         );
 
-        var sorters = List.of(selectionSort(), insertionSort(), bubbleSort());
+        var sorters = List.of(mergeSort(), selectionSort(), insertionSort(), bubbleSort());
 
         return sorters.stream()
                 .flatMap(sorter -> lists.stream()

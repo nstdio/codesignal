@@ -1,5 +1,6 @@
 package io.github.nstdio.codesignal;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.UnaryOperator;
 
@@ -20,6 +21,10 @@ public interface Sort<T extends Comparable<? super T>> extends UnaryOperator<Lis
 
     static <E extends Comparable<? super E>> Sort<E> selectionSort() {
         return new SelectionSort<>();
+    }
+
+    static <E extends Comparable<? super E>> Sort<E> mergeSort() {
+        return new MergeSort<>();
     }
 
     class BubbleSort<E extends Comparable<? super E>> implements Sort<E> {
@@ -88,6 +93,19 @@ public interface Sort<T extends Comparable<? super T>> extends UnaryOperator<Lis
         @Override
         public String toString() {
             return "SelectionSort";
+        }
+    }
+
+    class MergeSort<E extends Comparable<? super E>> implements Sort<E> {
+
+        @Override
+        public List<E> apply(List<E> lst) {
+            return lst;
+        }
+
+        @Override
+        public String toString() {
+            return "MergeSort";
         }
     }
 }
