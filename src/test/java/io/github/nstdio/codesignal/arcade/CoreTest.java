@@ -1,8 +1,8 @@
 package io.github.nstdio.codesignal.arcade;
 
-import org.junit.jupiter.api.Test;
-
 import static org.assertj.core.api.Assertions.assertThat;
+
+import org.junit.jupiter.api.Test;
 
 public class CoreTest {
     @Test
@@ -252,5 +252,18 @@ public class CoreTest {
                 {27, 9, 0},
                 {81, 63, 45},
         })).isEqualTo(new int[][]{{28}});
+    }
+
+    @Test
+    void minesweeper() {
+        assertThat(Core.minesweeper(new boolean[][]{
+                {true, true, true},
+                {true, true, true},
+                {true, true, true},
+        })).isEqualTo(new int[][]{
+                {3, 5, 3},
+                {5, 8, 5},
+                {3, 5, 3}
+        });
     }
 }

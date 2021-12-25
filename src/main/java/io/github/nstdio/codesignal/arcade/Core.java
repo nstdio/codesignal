@@ -632,4 +632,38 @@ public class Core {
 
         return blured;
     }
+
+    /**
+     * In the popular Minesweeper game you have a board with some mines and those cells that don't contain a mine have a
+     * number in it that indicates the total number of mines in the neighboring cells. Starting off with some
+     * arrangement of mines we want to create a Minesweeper game setup.
+     *
+     * @param matrix A non-empty rectangular matrix consisting of boolean values - true if the corresponding cell
+     *               contains a mine, false otherwise.
+     *
+     * @return Rectangular matrix of the same size as matrix each cell of which contains an integer equal to the number
+     * of mines in the neighboring cells. Two cells are called neighboring if they share at least one corner.
+     */
+    public static int[][] minesweeper(boolean[][] matrix) {
+        var board = new int[matrix.length][matrix[0].length];
+
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[i].length; j++) {
+
+                for (int k = 1; k >= -1; k--) {
+                    for (int l = -1; l <= 1; l++) {
+                        if (k == 0 && l == 0)
+                            continue;
+
+                        try {
+                            board[i][j] = matrix[i + l][j + k] ? ++board[i][j] : board[i][j];
+                        } catch (IndexOutOfBoundsException e) {
+                        }
+                    }
+                }
+            }
+        }
+
+        return board;
+    }
 }
