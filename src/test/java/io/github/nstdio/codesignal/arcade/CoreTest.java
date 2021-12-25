@@ -1,6 +1,8 @@
 package io.github.nstdio.codesignal.arcade;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
@@ -265,5 +267,12 @@ public class CoreTest {
                 {5, 8, 5},
                 {3, 5, 3}
         });
+    }
+
+    @Test
+    void evenDigitsOnly() {
+        assertTrue(Core.evenDigitsOnly(468402800));
+
+        assertFalse(Core.evenDigitsOnly(168402800));
     }
 }
