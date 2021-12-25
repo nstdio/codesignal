@@ -120,6 +120,7 @@ public interface Sort<T extends Comparable<? super T>> extends UnaryOperator<Lis
             var left = lst.subList(from, mid + 1).listIterator();
             var right = lst.subList(mid + 1, to + 1).listIterator();
 
+            // TODO: can we merge without allocating auxiliary list?
             List<E> merged = new ArrayList<>(to - from + 1);
             while (left.hasNext() && right.hasNext()) {
                 var lNext = left.next();
