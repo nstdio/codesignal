@@ -238,4 +238,19 @@ public class CoreTest {
         assertThat(Core.avoidObstacles(new int[]{1, 4, 10, 6, 2})).isEqualTo(7);
         assertThat(Core.avoidObstacles(new int[]{19, 32, 11, 23})).isEqualTo(3);
     }
+
+    @Test
+    void boxBlur() {
+        assertThat(Core.boxBlur(new int[][]{
+                {36, 0, 18, 9},
+                {27, 54, 9, 0},
+                {81, 63, 72, 45},
+        })).isEqualTo(new int[][]{{40, 30}});
+
+        assertThat(Core.boxBlur(new int[][]{
+                {0, 18, 9},
+                {27, 9, 0},
+                {81, 63, 45},
+        })).isEqualTo(new int[][]{{28}});
+    }
 }
