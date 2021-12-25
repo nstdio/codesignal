@@ -19,6 +19,7 @@ class SortTest {
 
     static Stream<Arguments> sortingData() {
         var lists = List.of(
+                new ArrayList<>(List.of(8, 7, 6, 5, 4, 3, 2, 1)),
                 new ArrayList<>(List.of(3, 2, 1)),
                 new ArrayList<>(List.of(1, 1, 1)),
                 new ArrayList<>(List.of(1, 2, 1, 1)),
@@ -42,6 +43,8 @@ class SortTest {
         List<Integer> actual = sorter.apply(lst);
 
         //then
-        assertThat(actual).isSorted();
+        assertThat(actual)
+                .hasSameSizeAs(lst)
+                .isSorted();
     }
 }
