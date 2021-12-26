@@ -698,4 +698,16 @@ public class Core {
     public static boolean variableName(String name) {
         return !Character.isDigit(name.charAt(0)) && name.matches("(?i)[a-z0-9_]+");
     }
+
+    /**
+     * Given a string, your task is to replace each of its characters by the next one in the English alphabet; i.e.
+     * replace a with b, replace b with c, etc (z would be replaced by a).
+     *
+     * @param input A non-empty string consisting of lowercase English characters.
+     *
+     * @return The resulting string after replacing each of its characters.
+     */
+    public static String alphabeticShift(String input) {
+        return input.chars().mapToObj(c -> Character.toString(c == 'z' ? 'a' : ++c)).collect(Collectors.joining());
+    }
 }

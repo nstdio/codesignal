@@ -1,6 +1,7 @@
 package io.github.nstdio.codesignal.arcade;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -286,5 +287,10 @@ public class CoreTest {
         assertFalse(Core.variableName("qq-q"));
         assertFalse(Core.variableName(" variable"));
         assertFalse(Core.variableName("va[riable0"));
+    }
+
+    @Test
+    void alphabeticShift() {
+        assertEquals("dsbaz", Core.alphabeticShift("crazy"));
     }
 }
