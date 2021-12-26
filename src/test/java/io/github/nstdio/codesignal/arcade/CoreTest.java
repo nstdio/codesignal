@@ -275,4 +275,16 @@ public class CoreTest {
 
         assertFalse(Core.evenDigitsOnly(168402800));
     }
+
+    @Test
+    void variableName() {
+        assertTrue(Core.variableName("var_1__Int"));
+        assertTrue(Core.variableName("variable0"));
+        assertTrue(Core.variableName("_Aas_23"));
+
+        assertFalse(Core.variableName("2w2"));
+        assertFalse(Core.variableName("qq-q"));
+        assertFalse(Core.variableName(" variable"));
+        assertFalse(Core.variableName("va[riable0"));
+    }
 }

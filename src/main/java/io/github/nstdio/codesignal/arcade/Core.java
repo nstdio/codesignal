@@ -688,4 +688,14 @@ public class Core {
         }
         return true;
     }
+
+    /**
+     * Correct variable names consist only of English letters, digits and underscores and they can't start with a
+     * digit.
+     * <p>
+     * Check if the given string is a correct variable name.
+     */
+    public static boolean variableName(String name) {
+        return !Character.isDigit(name.charAt(0)) && name.matches("(?i)[a-z0-9_]+");
+    }
 }
