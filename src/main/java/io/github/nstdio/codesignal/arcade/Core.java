@@ -710,4 +710,13 @@ public class Core {
     public static String alphabeticShift(String input) {
         return input.chars().mapToObj(c -> Character.toString(c == 'z' ? 'a' : ++c)).collect(Collectors.joining());
     }
+
+    /**
+     * Given two cells on the standard chess board, determine whether they have the same color or not.
+     */
+    public static boolean chessBoardCellColor(String cell1, String cell2) {
+        return cell1.charAt(0) % 2 == cell2.charAt(0) % 2
+                ? cell1.charAt(1) % 2 == cell2.charAt(1) % 2
+                : Math.abs(cell1.charAt(1) - cell2.charAt(1)) % 2 == 1;
+    }
 }

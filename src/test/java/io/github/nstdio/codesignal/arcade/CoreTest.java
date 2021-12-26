@@ -293,4 +293,20 @@ public class CoreTest {
     void alphabeticShift() {
         assertEquals("dsbaz", Core.alphabeticShift("crazy"));
     }
+
+    @Test
+    void chessBoardCellColor() {
+        assertTrue(Core.chessBoardCellColor("B3", "D5"));
+        assertTrue(Core.chessBoardCellColor("A1", "D2"));
+        assertTrue(Core.chessBoardCellColor("A1", "A3"));
+        assertTrue(Core.chessBoardCellColor("A1", "A5"));
+        assertTrue(Core.chessBoardCellColor("C1", "E7"));
+        assertTrue(Core.chessBoardCellColor("B3", "C8"));
+
+        assertFalse(Core.chessBoardCellColor("A1", "H3"));
+        assertFalse(Core.chessBoardCellColor("A1", "A2"));
+        assertFalse(Core.chessBoardCellColor("A1", "A4"));
+        assertFalse(Core.chessBoardCellColor("B3", "H8"));
+        assertFalse(Core.chessBoardCellColor("C3", "B5"));
+    }
 }
