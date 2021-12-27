@@ -1,6 +1,7 @@
 package io.github.nstdio.codesignal;
 
 import static io.github.nstdio.codesignal.Challenge.delivery;
+import static io.github.nstdio.codesignal.Challenge.domainType;
 import static io.github.nstdio.codesignal.Challenge.shoppingList;
 import static org.assertj.core.api.Assertions.assertThat;
 
