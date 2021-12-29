@@ -1,6 +1,10 @@
 package io.github.nstdio.codesignal;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
@@ -108,4 +112,58 @@ class Challenge {
                 .map(s -> labels.get(s.substring(s.lastIndexOf('.') + 1)))
                 .toArray(String[]::new);
     }
+
+    static String[][] domainForwarding(String[][] redirects) {
+        var resultMap = new TreeMap<String, List<String>>();
+
+        for (int i = 0; i < redirects.length; i++) {
+            var from = redirects[i][0];
+            var to = redirects[i][1];
+            List<String> paths = new ArrayList<>(List.of(from, to));
+
+            String curFrom = from;
+            String curTo = to;
+            for (int j = 0; j < redirects.length; j++) {
+                if (i == j) continue;
+
+                if (redirects[j][0].equals(curTo)) {
+                    paths.add(redirects[j][1]);
+                    curTo = redirects[j][1];
+                } else if (redirects[j][1].equals(curFrom)) {
+                    paths.add(redirects[j][0]);
+                    curFrom = redirects[j][0];
+                }
+            }
+
+            resultMap.compute(curTo, (k, v) -> {
+                if (v == null) return paths;
+                paths.stream().filter(s1 -> !v.contains(s1)).forEach(v::add);
+                return v;
+            });
+        }
+
+        var it = resultMap.entrySet().iterator();
+        while (it.hasNext()) {
+            var next = it.next();
+            for (Map.Entry<String, List<String>> e : resultMap.entrySet()) {
+                if (next == e)
+                    continue;
+
+                if (e.getValue().contains(next.getKey())) {
+                    next.getValue()
+                            .stream()
+                            .filter(s1 -> !e.getValue().contains(s1))
+                            .forEach(s -> e.getValue().add(s));
+                    it.remove();
+                    break;
+                }
+            }
+        }
+
+        return resultMap.values().stream()
+                .peek(Collections::sort)
+                .map(strings -> strings.toArray(new String[0]))
+                .toArray(String[][]::new);
+    }
+
 }
