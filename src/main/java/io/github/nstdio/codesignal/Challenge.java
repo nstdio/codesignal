@@ -2,6 +2,7 @@ package io.github.nstdio.codesignal;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -166,4 +167,39 @@ class Challenge {
                 .toArray(String[][]::new);
     }
 
+    static int typosquatting(int n, String domain) {
+        int k = 0;
+        var typos = new LinkedHashSet<String>();
+
+        do {
+            boolean found = false;
+            var toIterate = new ArrayList<>(typos);
+            toIterate.add(domain);
+
+            for (String d : toIterate) {
+                for (int i = 1, l = d.length(); i < l; i++) {
+                    var sb = new StringBuilder(d);
+                    var c1 = sb.charAt(i - 1);
+                    var c2 = sb.charAt(i);
+
+                    if (c1 == '.' || c2 == '.' || c1 == c2) continue;
+
+                    sb.setCharAt(i, c1);
+                    sb.setCharAt(i - 1, c2);
+
+                    var typo = sb.toString();
+                    if (!typo.equals(domain) && typos.add(typo)) {
+                        found = true;
+                    }
+                }
+            }
+            if (!found) {
+                return -1;
+            }
+
+            k++;
+        } while (typos.size() < n + 1);
+
+        return typos.size() > n ? --k : k;
+    }
 }

@@ -4,6 +4,7 @@ import static io.github.nstdio.codesignal.Challenge.delivery;
 import static io.github.nstdio.codesignal.Challenge.domainForwarding;
 import static io.github.nstdio.codesignal.Challenge.shoppingList;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
@@ -137,5 +138,22 @@ class ChallengeTest {
                         {"godaddy.com", "godaddy.ne", "godaddy.net", "godady.com"},
                         {"godaddy.org", "godaddycares.com"}
                 });
+    }
+
+    @Test
+    void testTyposquatting() {
+        assertEquals(-1, Challenge.typosquatting(3, "ab.ab"));
+        assertEquals(-1, Challenge.typosquatting(2, "a.ab"));
+
+        assertEquals(-1, Challenge.typosquatting(0, "aaa.aaa"));
+        assertEquals(-1, Challenge.typosquatting(10, "aaa.aaa"));
+
+        assertEquals(2, Challenge.typosquatting(9, "omg.tv"));
+        assertEquals(1, Challenge.typosquatting(7, "godaddy.com"));
+        assertEquals(1, Challenge.typosquatting(8, "godaddy.com"));
+        assertEquals(0, Challenge.typosquatting(1, "godaddy.com"));
+        assertEquals(0, Challenge.typosquatting(0, "godaddy.com"));
+        assertEquals(2, Challenge.typosquatting(85, "godaddy.godaddy.com"));
+        assertEquals(2, Challenge.typosquatting(85, "godaddy.godaddy.com"));
     }
 }
