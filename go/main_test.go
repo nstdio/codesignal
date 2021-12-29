@@ -2,8 +2,7 @@ package main
 
 import "testing"
 
-func TestDepositeProfit(t *testing.T) {
-
+func TestDepositProfit(t *testing.T) {
 	got := depositProfit(100, 20, 170)
 	want := 3
 
