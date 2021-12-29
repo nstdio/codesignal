@@ -309,4 +309,12 @@ public class CoreTest {
         assertFalse(Core.chessBoardCellColor("B3", "H8"));
         assertFalse(Core.chessBoardCellColor("C3", "B5"));
     }
+
+    @Test
+    void circleOfNumbers() {
+        assertEquals(0, Core.circleOfNumbers(6, 3));
+        assertEquals(7, Core.circleOfNumbers(10, 2));
+        assertEquals(2, Core.circleOfNumbers(10, 7));
+        assertEquals(3, Core.circleOfNumbers(4, 1));
+    }
 }

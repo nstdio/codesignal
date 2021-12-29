@@ -719,4 +719,21 @@ public class Core {
                 ? cell1.charAt(1) % 2 == cell2.charAt(1) % 2
                 : Math.abs(cell1.charAt(1) - cell2.charAt(1)) % 2 == 1;
     }
+
+    /**
+     * Consider integer numbers from 0 to n - 1 written down along the circle in such a way that the distance between
+     * any two neighboring numbers is equal (note that 0 and n - 1 are neighboring, too).
+     * <p>
+     * Given n and firstNumber, find the number which is written in the radially opposite position to firstNumber.
+     * <p>
+     * Example
+     * <p>
+     * For n = 10 and firstNumber = 2, the output should be solution(n, firstNumber) = 7.
+     *
+     * @return
+     */
+    public static int circleOfNumbers(int n, int firstNumber) {
+        var i = firstNumber - n / 2;
+        return i < 0 ? i + n : i;
+    }
 }
