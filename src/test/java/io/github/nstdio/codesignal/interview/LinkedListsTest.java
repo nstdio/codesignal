@@ -2,6 +2,7 @@ package io.github.nstdio.codesignal.interview;
 
 import static io.github.nstdio.codesignal.interview.LinkedLists.addTwoHugeNumbers;
 import static io.github.nstdio.codesignal.interview.LinkedLists.isListPalindrome;
+import static io.github.nstdio.codesignal.interview.LinkedLists.mergeTwoLinkedLists;
 import static io.github.nstdio.codesignal.interview.LinkedLists.removeKFromList;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -45,5 +46,20 @@ public class LinkedListsTest {
 
         assertThat(addTwoHugeNumbers(ListNode.of(123, 4, 5), ListNode.of(100, 100, 100)))
                 .hasToString("[223, 104, 105]");
+    }
+
+    @Test
+    void testMergeTwoLinkedLists() {
+        assertThat(mergeTwoLinkedLists(ListNode.of(5, 10, 15, 40), ListNode.of(2, 3, 20)))
+                .hasToString("[2, 3, 5, 10, 15, 20, 40]");
+
+        assertThat(mergeTwoLinkedLists(ListNode.of(1, 2, 3), ListNode.of(4, 5, 6)))
+                .hasToString("[1, 2, 3, 4, 5, 6]");
+
+        assertThat(mergeTwoLinkedLists(ListNode.of(1, 1, 2, 4), ListNode.of(0, 3, 5)))
+                .hasToString("[0, 1, 1, 2, 3, 4, 5]");
+
+        assertThat(mergeTwoLinkedLists(null, ListNode.of(1, 1, 2, 2, 4, 7, 7, 8)))
+                .hasToString("[1, 1, 2, 2, 4, 7, 7, 8]");
     }
 }

@@ -91,4 +91,21 @@ public class LinkedLists {
         return r;
     }
 
+    static ListNode<Integer> mergeTwoLinkedLists(ListNode<Integer> l1, ListNode<Integer> l2) {
+        ListNode<Integer> head = new ListNode<>(-1), curr = head;
+        while (l1 != null && l2 != null) {
+            if (l1.value <= l2.value) {
+                curr.next = l1;
+                l1 = l1.next;
+            } else {
+                curr.next = l2;
+                l2 = l2.next;
+            }
+
+            curr = curr.next;
+        }
+
+        curr.next = l1 != null ? l1 : l2;
+        return head.next;
+    }
 }
