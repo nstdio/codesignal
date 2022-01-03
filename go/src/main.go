@@ -1,6 +1,8 @@
 package main
 
-import "math"
+import (
+	"math"
+)
 
 func main() {
 }
@@ -39,4 +41,21 @@ func Abs(a int) int {
 		return -a
 	}
 	return a
+}
+
+func longestUncorruptedSegment(sourceArray []int, destinationArray []int) []int {
+	l, lMax, start := 0, 0, 0
+	for i := 0; i < len(sourceArray); i++ {
+		if sourceArray[i] == destinationArray[i] {
+			l++
+			if l > lMax {
+				lMax = l
+				start = i - l + 1
+			}
+		} else {
+			l = 0
+		}
+	}
+
+	return []int{lMax, start}
 }
