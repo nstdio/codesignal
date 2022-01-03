@@ -202,4 +202,49 @@ class Challenge {
 
         return typos.size() > n ? --k : k;
     }
+
+    /**
+     * In a block storage system, new data is written in blocks. We are going to represent the flash memory as one
+     * sequential array. We have a list of block writes coming in the form of arrays of size 2: writes[i] =
+     * [first_block_written, last_block_written].
+     * <p>
+     * Each block has a rewrite limit. If rewrites on a block reach a certain specified threshold we should run a
+     * special diagnostic.
+     * <p>
+     * Given blockCount (an integer representing the total number of blocks), writes (the list of block-write arrays of
+     * size 2), and threshold, your task is to return the list of disjoint block segments, each consisting of blocks
+     * that have reached the rewrite threshold. The list of block segments should be sorted in increasing order by their
+     * left ends.
+     *
+     * @param blockCount The number of blocks in the flash memory.
+     * @param writes     An array representing the log of writes coming in.
+     * @param threshold  The number of rewrites after which a special diagnostic should be run.
+     *
+     * @return
+     */
+    static int[][] blockStorageRewrites(int blockCount, int[][] writes, int threshold) {
+        int[] rewrites = new int[blockCount];
+        for (int[] write : writes) {
+            for (int j = write[0]; j <= write[1]; j++) {
+                rewrites[j] = ++rewrites[j];
+            }
+        }
+
+        var ret = new ArrayList<int[]>();
+
+        for (int i = 0; i < rewrites.length; i++) {
+            if (rewrites[i] >= threshold) {
+                var block = new int[2];
+                block[0] = i;
+
+                while (i + 1 < rewrites.length && rewrites[i] >= threshold) {
+                    i++;
+                }
+                block[1] = block[0] == i ? i : Math.max(i - 1, 0);
+                ret.add(block);
+            }
+        }
+
+        return ret.toArray(int[][]::new);
+    }
 }

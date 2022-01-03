@@ -156,4 +156,39 @@ class ChallengeTest {
         assertEquals(2, Challenge.typosquatting(85, "godaddy.godaddy.com"));
         assertEquals(2, Challenge.typosquatting(85, "godaddy.godaddy.com"));
     }
+
+    @Test
+    void testBlockStorageRewrites() {
+        assertThat(Challenge.blockStorageRewrites(7, new int[][]{
+                {1, 1},
+                {1, 2},
+                {1, 3},
+                {1, 4},
+                {1, 5},
+                {5, 6},
+                {6, 6},
+                {6, 6},
+        }, 3))
+                .isEqualTo(new int[][]{{1, 3}, {6, 6}});
+
+        assertThat(Challenge.blockStorageRewrites(10, new int[][]{{0, 4}, {3, 5}, {2, 6}}, 2))
+                .isEqualTo(new int[][]{{2, 5}});
+        assertThat(Challenge.blockStorageRewrites(1, new int[][]{
+                {0, 0},
+                {0, 0},
+                {0, 0},
+                {0, 0},
+                {0, 0},
+                {0, 0},
+        }, 2))
+                .isEqualTo(new int[][]{{0, 0}});
+
+        assertThat(Challenge.blockStorageRewrites(10, new int[][]{{0, 4}, {3, 5}, {2, 6}}, 3))
+                .isEqualTo(new int[][]{{3, 4}});
+
+        assertThat(Challenge.blockStorageRewrites(10, new int[][]{{3, 4}, {0, 1}, {6, 6}}, 1))
+                .isEqualTo(new int[][]{{0, 1}, {3, 4}, {6, 6}});
+        assertThat(Challenge.blockStorageRewrites(1, new int[][]{}, 1))
+                .isEqualTo(new int[][]{});
+    }
 }
