@@ -3,6 +3,7 @@ package io.github.nstdio.codesignal.interview;
 import static io.github.nstdio.codesignal.interview.LinkedLists.addTwoHugeNumbers;
 import static io.github.nstdio.codesignal.interview.LinkedLists.isListPalindrome;
 import static io.github.nstdio.codesignal.interview.LinkedLists.mergeTwoLinkedLists;
+import static io.github.nstdio.codesignal.interview.LinkedLists.rearrangeLastN;
 import static io.github.nstdio.codesignal.interview.LinkedLists.removeKFromList;
 import static io.github.nstdio.codesignal.interview.LinkedLists.reverse;
 import static io.github.nstdio.codesignal.interview.LinkedLists.reverseNodesInKGroups;
@@ -75,5 +76,12 @@ public class LinkedListsTest {
         assertThat(reverseNodesInKGroups(ListNode.of(1, 2, 3, 4, 5), 2)).hasToString("[2, 1, 4, 3, 5]");
 
         assertThat(reverseNodesInKGroups(ListNode.of(1, 2, 3, 4, 5, 6), 3)).hasToString("[3, 2, 1, 6, 5, 4]");
+    }
+
+    @Test
+    void testRearrangeLastN() {
+        assertThat(rearrangeLastN(ListNode.of(1, 2, 3, 4), 2)).hasToString("[3, 4, 1, 2]");
+        assertThat(rearrangeLastN(ListNode.of(1, 2, 3, 4, 5, 6, 7, 8), 2)).hasToString("[7, 8, 1, 2, 3, 4, 5, 6]");
+        assertThat(rearrangeLastN(ListNode.of(1, 2, 3, 4, 5), 2)).hasToString("[4, 5, 1, 2, 3]");
     }
 }

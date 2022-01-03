@@ -175,4 +175,41 @@ public class LinkedLists {
         return startNext;
 
     }
+
+    /**
+     * Given a singly linked list of integers l and a non-negative integer n, move the last n list nodes to the
+     * beginning of the linked list.
+     * <p>
+     * Note: Try to solve this task in O(list size) time using O(1) additional space, since this is what you'll be asked
+     * during an interview.
+     * <p>
+     * For l = [1, 2, 3, 4, 5] and n = 3, the output should be solution(l, n) = [3, 4, 5, 1, 2];
+     * <p>
+     * For l = [1, 2, 3, 4, 5, 6, 7] and n = 1, the output should be solution(l, n) = [7, 1, 2, 3, 4, 5, 6].
+     *
+     * @param l A singly linked list of integers.
+     * @param n A non-negative integer.
+     *
+     * @return Return l with the n last elements moved to the beginning.
+     */
+    static ListNode<Integer> rearrangeLastN(ListNode<Integer> l, int n) {
+        if (l == null || n == 0) return l;
+        var head = l;
+        int i = 0;
+        while (head.next != null) {
+            head = head.next;
+            i++;
+        }
+
+        head.next = l;
+
+        for (int j = 0; j < i + 1 - n; j++) {
+            head = head.next;
+        }
+
+        l = head.next;
+        head.next = null;
+
+        return l;
+    }
 }
