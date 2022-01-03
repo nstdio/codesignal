@@ -3,6 +3,18 @@ package io.github.nstdio.codesignal.interview;
 import java.util.ArrayDeque;
 
 public class LinkedLists {
+    static ListNode<Integer> reverse(ListNode<Integer> l) {
+        ListNode<Integer> prev = null, cur = l, next = null;
+        while (cur != null) {
+            next = cur.next;
+            cur.next = prev;
+            prev = cur;
+            cur = next;
+        }
+
+        return prev;
+    }
+
     static ListNode<Integer> removeKFromList(ListNode<Integer> l, int k) {
         if (l == null)
             return null;

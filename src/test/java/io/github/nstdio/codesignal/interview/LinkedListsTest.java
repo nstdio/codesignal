@@ -4,11 +4,17 @@ import static io.github.nstdio.codesignal.interview.LinkedLists.addTwoHugeNumber
 import static io.github.nstdio.codesignal.interview.LinkedLists.isListPalindrome;
 import static io.github.nstdio.codesignal.interview.LinkedLists.mergeTwoLinkedLists;
 import static io.github.nstdio.codesignal.interview.LinkedLists.removeKFromList;
+import static io.github.nstdio.codesignal.interview.LinkedLists.reverse;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import org.junit.jupiter.api.Test;
 
 public class LinkedListsTest {
+
+    @Test
+    void testReverse() {
+        assertThat(reverse(ListNode.of(1, 2, 3))).hasToString("[3, 2, 1]");
+    }
 
     @Test
     void testRemoveKFromList() {
