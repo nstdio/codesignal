@@ -2,7 +2,9 @@ package io.github.nstdio.codesignal;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -201,5 +203,68 @@ class Challenge {
         } while (typos.size() < n + 1);
 
         return typos.size() > n ? --k : k;
+    }
+
+    static String[][] menuTypesetting(String[][] menu, int numberOfItems) {
+        return v1__menuTypesetting(menu, numberOfItems);
+    }
+
+    private static String[][] v1__menuTypesetting(String[][] menu, int numberOfItems) {
+        var m = new LinkedHashMap<String, List<String>>();
+
+        {
+            String curHeader = null;
+            for (String[] item : menu) {
+                if (item[1].equals("Section Header")) {
+                    curHeader = item[0];
+                } else {
+                    m.computeIfAbsent(curHeader, s -> new ArrayList<>())
+                            .add(item[0]);
+                }
+            }
+        }
+
+        var result = new LinkedList<List<String>>();
+        for (Map.Entry<String, List<String>> e : m.entrySet()) {
+            List<String> page = null;
+            boolean fillingPreviousPage = false;
+            // Do we have two or more slots on previous page?
+            if (!result.isEmpty() && numberOfItems - result.getLast().size() >= 2) {
+                var currentSize = e.getValue().size() + 1;
+                var prevSize = result.getLast().size();
+                var remaining = Math.abs(prevSize - currentSize);
+                if (remaining % numberOfItems != 1) {
+                    page = result.getLast();
+                    fillingPreviousPage = true;
+                }
+            }
+
+            page = page == null ? new ArrayList<>() : page;
+
+            var menuItems = e.getValue();
+            menuItems.add(0, e.getKey());
+            int numberOfPages = Math.max((int) Math.ceil(menuItems.size() / (double) numberOfItems), 1);
+            int perPage = numberOfItems;
+
+            if (menuItems.size() % numberOfItems == 1) {
+                numberOfPages++;
+                perPage--;
+            }
+
+            var it = menuItems.iterator();
+            for (int i = 0; it.hasNext() && i < numberOfPages; i++) {
+                for (int j = 0; it.hasNext() && j < perPage; j++) {
+                    page.add(it.next());
+                }
+                if (!fillingPreviousPage) {
+                    result.add(page);
+                }
+                page = new ArrayList<>();
+            }
+        }
+
+        return result.stream()
+                .map(strings -> strings.toArray(new String[0]))
+                .toArray(String[][]::new);
     }
 }

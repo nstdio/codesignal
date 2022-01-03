@@ -156,4 +156,139 @@ class ChallengeTest {
         assertEquals(2, Challenge.typosquatting(85, "godaddy.godaddy.com"));
         assertEquals(2, Challenge.typosquatting(85, "godaddy.godaddy.com"));
     }
+
+    @Test
+    void testMenuTypesetting() {
+        assertThat(Challenge.menuTypesetting(new String[][]{
+                {"animals", "Section Header"},
+                {"cat1", "Menu Item"},
+                {"animals2", "Section Header"},
+                {"cat1", "Menu Item"},
+                {"animals3", "Section Header"},
+                {"cat1", "Menu Item"},
+                {"cat2", "Menu Item"},
+                {"cat3", "Menu Item"},
+        }, 3))
+                .isEqualTo(new String[][]{
+                        {"animals", "cat1"},
+                        {"animals2", "cat1"},
+                        {"animals3", "cat1"},
+                });
+
+        assertThat(Challenge.menuTypesetting(new String[][]{
+                {"animals", "Section Header"},
+                {"cat1", "Menu Item"},
+                {"cat2", "Menu Item"},
+                {"cat3", "Menu Item"},
+                {"cat4", "Menu Item"},
+        }, 5))
+                .isEqualTo(new String[][]{
+                        {"animals", "cat1", "cat2", "cat3", "cat4"},
+                });
+
+        assertThat(Challenge.menuTypesetting(new String[][]{
+                {"animals", "Section Header"},
+                {"cat1", "Menu Item"},
+                {"cat2", "Menu Item"},
+                {"cat3", "Menu Item"},
+                {"cat4", "Menu Item"},
+        }, 4))
+                .isEqualTo(new String[][]{
+                        {"animals", "cat1", "cat2"}, {"cat3", "cat4"},
+                });
+
+        assertThat(Challenge.menuTypesetting(new String[][]{
+                {"animals", "Section Header"},
+                {"cat1", "Menu Item"},
+                {"cat2", "Menu Item"},
+                {"cat3", "Menu Item"},
+                {"cat4", "Menu Item"},
+                {"cat5", "Menu Item"},
+                {"birds", "Section Header"},
+                {"woody", "Menu Item"},
+                {"soroka", "Menu Item"},
+        }, 4))
+                .isEqualTo(new String[][]{
+                        {"animals", "cat1", "cat2", "cat3"},
+                        {"cat4", "cat5"},
+                        {"birds", "woody", "soroka"},
+                });
+
+        assertThat(Challenge.menuTypesetting(new String[][]{
+                {"animals", "Section Header"},
+                {"cat", "Menu Item"},
+                {"birds", "Section Header"},
+                {"woody", "Menu Item"},
+        }, 15))
+                .isEqualTo(new String[][]{
+                        {"animals", "cat", "birds", "woody"},
+                });
+
+        assertThat(Challenge.menuTypesetting(new String[][]{
+                {"animals", "Section Header"},
+                {"cat", "Menu Item"},
+                {"birds", "Section Header"},
+                {"woody", "Menu Item"},
+        }, 5))
+                .isEqualTo(new String[][]{
+                        {"animals", "cat", "birds", "woody"},
+                });
+
+        assertThat(Challenge.menuTypesetting(new String[][]{
+                {"animals", "Section Header"},
+                {"cat", "Menu Item"},
+                {"birds", "Section Header"},
+                {"woody", "Menu Item"}
+        }, 4))
+                .isEqualTo(new String[][]{
+                        {"animals", "cat", "birds", "woody"},
+                });
+        assertThat(Challenge.menuTypesetting(new String[][]{
+                {"stuff", "Section Header"},
+                {"oh", "Menu Item"},
+                {"meh", "Menu Item"},
+                {"wow", "Menu Item"},
+                {"well", "Menu Item"}
+        }, 4))
+                .isEqualTo(new String[][]{
+                        {"stuff", "oh", "meh"},
+                        {"wow", "well"},
+                });
+
+        assertThat(Challenge.menuTypesetting(new String[][]{
+                {"stuff", "Section Header"},
+                {"oh", "Menu Item"},
+                {"meh", "Menu Item"},
+                {"wow", "Menu Item"},
+                {"well", "Menu Item"}
+        }, 3))
+                .isEqualTo(new String[][]{
+                        {"stuff", "oh", "meh"},
+                        {"wow", "well"},
+                });
+
+        assertThat(Challenge.menuTypesetting(new String[][]{
+                {"animals", "Section Header"},
+                {"cat", "Menu Item"},
+                {"birds", "Section Header"},
+                {"woody", "Menu Item"}
+        }, 3))
+                .isEqualTo(new String[][]{
+                        {"animals", "cat"},
+                        {"birds", "woody"},
+                });
+
+        assertThat(Challenge.menuTypesetting(new String[][]{{"Breakfast", "Section Header"},
+                {"Eggs and Toast", "Menu Item"},
+                {"Waffles", "Menu Item"},
+                {"Orange juice", "Menu Item"},
+                {"Dinner", "Section Header"},
+                {"Steak", "Menu Item"},
+                {"Merlot", "Menu Item"}}, 3))
+                .isEqualTo(new String[][]{
+                        {"Breakfast", "Eggs and Toast"},
+                        {"Waffles", "Orange juice"},
+                        {"Dinner", "Steak", "Merlot"},
+                });
+    }
 }
