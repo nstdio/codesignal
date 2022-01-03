@@ -67,44 +67,4 @@ public class LinkedLists {
 
         return num == revNum;
     }
-
-    private static boolean isListPalindrome2(ListNode<Integer> l) {
-        int size = 0;
-        ListNode<Integer> cur = l;
-        while (cur != null) {
-            size++;
-            cur = cur.next;
-        }
-
-        cur = l;
-        int j = 0;
-        while (cur != null) {
-            ListNode<Integer> tmp = cur;
-            for (int i = j; i < size - j - 1; i++) {
-                tmp = tmp.next;
-            }
-            if (!cur.value.equals(tmp.value)) {
-                return false;
-            }
-
-            j++;
-            cur = cur.next;
-        }
-
-        return true;
-    }
-
-    private static boolean isListPalindromeDummy(ListNode<Integer> l) {
-        List<Integer> nodes = new ArrayList<>();
-        while (l != null) {
-            nodes.add(l.value);
-            l = l.next;
-        }
-
-        for (int i = 0, j = nodes.size() - 1; i <= j; i++, j--)
-            if (!nodes.get(i).equals(nodes.get(j)))
-                return false;
-
-        return true;
-    }
 }
