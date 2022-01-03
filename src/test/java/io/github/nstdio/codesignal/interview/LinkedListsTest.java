@@ -5,6 +5,7 @@ import static io.github.nstdio.codesignal.interview.LinkedLists.isListPalindrome
 import static io.github.nstdio.codesignal.interview.LinkedLists.mergeTwoLinkedLists;
 import static io.github.nstdio.codesignal.interview.LinkedLists.removeKFromList;
 import static io.github.nstdio.codesignal.interview.LinkedLists.reverse;
+import static io.github.nstdio.codesignal.interview.LinkedLists.reverseNodesInKGroups;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import org.junit.jupiter.api.Test;
@@ -67,5 +68,12 @@ public class LinkedListsTest {
 
         assertThat(mergeTwoLinkedLists(null, ListNode.of(1, 1, 2, 2, 4, 7, 7, 8)))
                 .hasToString("[1, 1, 2, 2, 4, 7, 7, 8]");
+    }
+
+    @Test
+    void testReverseNodesInKGroups() {
+        assertThat(reverseNodesInKGroups(ListNode.of(1, 2, 3, 4, 5), 2)).hasToString("[2, 1, 4, 3, 5]");
+
+        assertThat(reverseNodesInKGroups(ListNode.of(1, 2, 3, 4, 5, 6), 3)).hasToString("[3, 2, 1, 6, 5, 4]");
     }
 }
