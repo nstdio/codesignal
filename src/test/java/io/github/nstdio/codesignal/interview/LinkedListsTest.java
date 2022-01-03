@@ -1,10 +1,11 @@
 package io.github.nstdio.codesignal.interview;
 
-import org.junit.jupiter.api.Test;
-
+import static io.github.nstdio.codesignal.interview.LinkedLists.addTwoHugeNumbers;
 import static io.github.nstdio.codesignal.interview.LinkedLists.isListPalindrome;
 import static io.github.nstdio.codesignal.interview.LinkedLists.removeKFromList;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+
+import org.junit.jupiter.api.Test;
 
 public class LinkedListsTest {
 
@@ -35,5 +36,14 @@ public class LinkedListsTest {
         assertThat(isListPalindrome(ListNode.of(1, 1, 1, 1, 1))).isTrue();
 
         assertThat(isListPalindrome(ListNode.of(1, 2, 3, 3, 2))).isFalse(); // 12332    23321
+    }
+
+    @Test
+    void testAddTwoHugeIntegers() {
+        assertThat(addTwoHugeNumbers(ListNode.of(9876, 5432, 1999), ListNode.of(1, 8001)))
+                .hasToString("[9876, 5434, 0]");
+
+        assertThat(addTwoHugeNumbers(ListNode.of(123, 4, 5), ListNode.of(100, 100, 100)))
+                .hasToString("[223, 104, 105]");
     }
 }
