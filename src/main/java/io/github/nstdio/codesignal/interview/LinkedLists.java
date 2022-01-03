@@ -4,7 +4,7 @@ import java.util.ArrayDeque;
 
 public class LinkedLists {
     static ListNode<Integer> reverse(ListNode<Integer> l) {
-        ListNode<Integer> prev = null, cur = l, next = null;
+        ListNode<Integer> prev = null, cur = l, next;
         while (cur != null) {
             next = cur.next;
             cur.next = prev;
