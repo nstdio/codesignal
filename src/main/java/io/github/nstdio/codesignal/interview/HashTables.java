@@ -1,23 +1,28 @@
 package io.github.nstdio.codesignal.interview;
 
+import static java.util.stream.Collectors.groupingBy;
+import static java.util.stream.Collectors.toCollection;
+
 import java.util.Arrays;
-import java.util.Set;
+import java.util.Map;
 import java.util.TreeMap;
 import java.util.TreeSet;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class HashTables {
     static String[][] groupingDishes(String[][] dishes) {
-        var m = new TreeMap<String, Set<String>>();
-        Arrays.stream(dishes).forEach(dish -> Arrays.stream(dish).skip(1)
-                .map(s -> m.computeIfAbsent(s, k -> new TreeSet<>()))
-                .forEach(s -> s.add(dish[0])));
-
-        return m.entrySet()
+        return Arrays.stream(dishes)
+                .flatMap(dish -> Arrays.stream(dish)
+                        .skip(1)
+                        .map(s -> Map.entry(s, dish[0]))
+                )
+                .collect(Collectors.groupingBy(Map.Entry::getKey, TreeMap::new, Collectors.mapping(Map.Entry::getValue, toCollection(TreeSet::new))))
+                .entrySet()
                 .stream()
-                .filter(e -> e.getValue().size() != 1)
+                .filter(e -> e.getValue().size() > 1)
                 .map(e -> Stream.concat(Stream.of(e.getKey()), e.getValue().stream()))
-                .map(lst -> lst.toArray(String[]::new))
+                .map(s -> s.toArray(String[]::new))
                 .toArray(String[][]::new);
     }
 }
