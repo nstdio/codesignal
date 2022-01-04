@@ -5,6 +5,7 @@ import static java.util.stream.Collectors.mapping;
 import static java.util.stream.Collectors.toCollection;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.TreeSet;
@@ -24,5 +25,40 @@ public class HashTables {
                 .map(e -> Stream.concat(Stream.of(e.getKey()), e.getValue().stream()))
                 .map(s -> s.toArray(String[]::new))
                 .toArray(String[][]::new);
+    }
+
+    /**
+     * Given an array strings, determine whether it follows the sequence given in the patterns array. In other words,
+     * there should be no i and j for which strings[i] = strings[j] and patterns[i] ≠ patterns[j] or for which
+     * strings[i] ≠ strings[j] and patterns[i] = patterns[j].
+     * <p>
+     * For strings = ["cat", "dog", "dog"] and patterns = ["a", "b", "b"], the output should be solution(strings,
+     * patterns) = true;
+     * <p>
+     * For strings = ["cat", "dog", "doggy"] and patterns = ["a", "b", "b"], the output should be solution(strings,
+     * patterns) = false.
+     *
+     * @param strings  An array of strings, each containing only lowercase English letters.
+     * @param patterns An array of pattern strings, each containing only lowercase English letters.
+     *
+     * @return Return true if strings follows patterns and false otherwise.
+     */
+    static boolean areFollowingPatterns(String[] strings, String[] patterns) {
+        var i2p = new HashMap<String, String>();
+        var p2i = new HashMap<String, String>();
+
+        for (int i = 0; i < strings.length; i++) {
+            var item = strings[i];
+            var pattern = patterns[i];
+
+            if (!i2p.containsKey(item) && !p2i.containsKey(pattern)) {
+                i2p.put(item, pattern);
+                p2i.put(pattern, item);
+            } else if (!pattern.equals(i2p.get(item)) || !item.equals(p2i.get(pattern))) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }
