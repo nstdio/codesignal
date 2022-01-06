@@ -43,4 +43,12 @@ class HashTablesTest {
                 "gafdrts"}));
         assertFalse(HashTables.areFollowingPatterns(new String[]{"cat", "dog", "doggy"}, new String[]{"a", "b", "b"}));
     }
+
+    @Test
+    void testContainsCloseNums() {
+        assertTrue(HashTables.containsCloseNums(new int[]{0, 1, 2, 3, 5, 2}, 3));
+        assertFalse(HashTables.containsCloseNums(new int[]{0, 1, 2, 3, 5, 2}, 2));
+        assertFalse(HashTables.containsCloseNums(new int[]{}, 0));
+        assertTrue(HashTables.containsCloseNums(new int[]{99, 99}, 2));
+    }
 }
