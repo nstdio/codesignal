@@ -6,9 +6,12 @@ import static java.util.stream.Collectors.toCollection;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.TreeSet;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class HashTables {
@@ -89,5 +92,30 @@ public class HashTables {
         }
 
         return false;
+    }
+
+    /**
+     * You have a collection of coins, and you know the values of the coins and the quantity of each type of coin in it.
+     * You want to know how many distinct sums you can make from non-empty groupings of these coins.
+     *
+     * @param coins    An array containing the values of the coins in your collection.
+     * @param quantity An array containing the quantity of each type of coin in your collection. quantity[i] indicates
+     *                 the number of coins that have a value of coins[i].
+     *
+     * @return The number of different possible sums that can be created from non-empty groupings of your coins.
+     */
+    static int possibleSums(int[] coins, int[] quantity) {
+        var ret = new HashSet<Integer>();
+        ret.add(0);
+        for (int i = 0; i < quantity.length; i++) {
+            int c = coins[i];
+            for (Integer k : List.copyOf(ret)) {
+                IntStream.rangeClosed(1, quantity[i])
+                        .map(j -> k + j * c)
+                        .forEach(ret::add);
+            }
+        }
+
+        return ret.size() - 1;
     }
 }
