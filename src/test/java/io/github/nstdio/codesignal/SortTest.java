@@ -1,5 +1,13 @@
 package io.github.nstdio.codesignal;
 
+import static io.github.nstdio.codesignal.Sort.bubbleSort;
+import static io.github.nstdio.codesignal.Sort.insertionSort;
+import static io.github.nstdio.codesignal.Sort.mergeSort;
+import static io.github.nstdio.codesignal.Sort.quickSort;
+import static io.github.nstdio.codesignal.Sort.selectionSort;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.params.provider.Arguments.arguments;
+
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -7,13 +15,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
-
-import static io.github.nstdio.codesignal.Sort.bubbleSort;
-import static io.github.nstdio.codesignal.Sort.insertionSort;
-import static io.github.nstdio.codesignal.Sort.mergeSort;
-import static io.github.nstdio.codesignal.Sort.selectionSort;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 class SortTest {
 
@@ -28,7 +29,8 @@ class SortTest {
                 new ArrayList<>()
         );
 
-        var sorters = List.of(mergeSort(), selectionSort(), insertionSort(), bubbleSort());
+        var sorters = List.of(
+                quickSort(), mergeSort(), selectionSort(), insertionSort(), bubbleSort());
 
         return sorters.stream()
                 .flatMap(sorter -> lists.stream()

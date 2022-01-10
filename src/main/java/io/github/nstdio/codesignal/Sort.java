@@ -1,10 +1,10 @@
 package io.github.nstdio.codesignal;
 
+import static java.util.Collections.swap;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.UnaryOperator;
-
-import static java.util.Collections.swap;
 
 /**
  * @param <T> The element type.
@@ -25,6 +25,10 @@ public interface Sort<T extends Comparable<? super T>> extends UnaryOperator<Lis
 
     static <E extends Comparable<? super E>> Sort<E> mergeSort() {
         return new MergeSort<>();
+    }
+
+    static <E extends Comparable<? super E>> Sort<E> quickSort() {
+        return new QuickSort<>();
     }
 
     class BubbleSort<E extends Comparable<? super E>> implements Sort<E> {
@@ -146,6 +150,51 @@ public interface Sort<T extends Comparable<? super T>> extends UnaryOperator<Lis
         @Override
         public String toString() {
             return "MergeSort";
+        }
+    }
+
+    class QuickSort<E extends Comparable<? super E>> implements Sort<E> {
+
+        @Override
+        public List<E> apply(List<E> es) {
+            quicksort(es, 0, es.size() - 1);
+
+            return es;
+        }
+
+        void quicksort(List<E> es, int lo, int hi) {
+            if (lo >= 0 && hi >= 0 && lo < hi) {
+                int pivot = partition(es, lo, hi);
+
+                quicksort(es, lo, pivot);
+                quicksort(es, pivot + 1, hi);
+            }
+        }
+
+        int partition(List<E> es, int lo, int hi) {
+            E pivot = es.get((hi + lo) / 2);
+
+            int i = lo - 1;
+            int j = hi + 1;
+
+            while (true) {
+                //noinspection StatementWithEmptyBody
+                while (es.get(++i).compareTo(pivot) < 0) {
+                }
+
+                //noinspection StatementWithEmptyBody
+                while (es.get(--j).compareTo(pivot) > 0) {
+                }
+
+                if (i >= j) return j;
+
+                swap(es, i, j);
+            }
+        }
+
+        @Override
+        public String toString() {
+            return "QuickSort";
         }
     }
 }
