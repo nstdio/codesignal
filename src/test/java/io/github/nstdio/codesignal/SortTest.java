@@ -34,7 +34,7 @@ class SortTest {
 
         return sorters.stream()
                 .flatMap(sorter -> lists.stream()
-                        .map(list -> arguments(sorter, list))
+                        .map(list -> arguments(sorter, new ArrayList<>(list)))
                 );
     }
 
