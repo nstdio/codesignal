@@ -191,4 +191,11 @@ class ChallengeTest {
         assertThat(Challenge.blockStorageRewrites(1, new int[][]{}, 1))
                 .isEqualTo(new int[][]{});
     }
+
+    @Test
+    void coverDebts() {
+        assertThat(Challenge.coverDebts(4007, new int[]{5, 2, 6, 3, 1, 9, 7, 8, 4}, new int[]{300, 500, 850, 200, 900, 150, 700, 400, 600})).isEqualTo(45);
+        assertThat(Challenge.coverDebts(40, new int[]{2, 2, 5}, new int[]{75, 25, 25})).isEqualTo(10.8125);
+        assertThat(Challenge.coverDebts(50, new int[]{2, 2, 5}, new int[]{200, 100, 150})).isEqualTo(22);
+    }
 }

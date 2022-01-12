@@ -2,11 +2,14 @@ package io.github.nstdio.codesignal;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 class Challenge {
@@ -246,5 +249,46 @@ class Challenge {
         }
 
         return ret.toArray(int[][]::new);
+    }
+
+    static double coverDebts(int s, int[] debts, int[] interests) {
+        class Debt {
+            double value;
+            final int interest;
+
+            Debt(double value, int interest) {
+                this.value = value;
+                this.interest = interest;
+            }
+        }
+
+        var lst = IntStream.range(0, debts.length)
+                .mapToObj(i -> new Debt(debts[i], interests[i]))
+                .sorted((o1, o2) -> Comparator.<Integer>reverseOrder().compare(o1.interest, o2.interest))
+                .collect(Collectors.toList());
+
+        double totalSpend = 0.0;
+        int skipped = 0;
+        while (skipped != lst.size()) {
+            double spend = s * 0.1;
+            skipped = 0;
+            for (Debt debt : lst) {
+                if (debt.value == 0) {
+                    skipped++;
+                } else {
+                    if (spend > 0) {
+                        double leftSpend = Math.max(spend - debt.value, 0.0);
+
+                        debt.value = Math.max(debt.value - spend, 0.0);
+                        totalSpend += spend - leftSpend;
+                        spend = leftSpend;
+                    }
+
+                    debt.value += debt.value * (debt.interest / 100.0);
+                }
+            }
+        }
+
+        return totalSpend;
     }
 }
