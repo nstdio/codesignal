@@ -59,3 +59,16 @@ func longestUncorruptedSegment(sourceArray []int, destinationArray []int) []int 
 
 	return []int{lMax, start}
 }
+
+func extractEachKth(inputArray []int, k int) []int {
+	n := len(inputArray)
+	ret := make([]int, 0, n-n/k)
+
+	for i, item := range inputArray {
+		if (i+1)%k != 0 {
+			ret = append(ret, item)
+		}
+	}
+
+	return ret
+}

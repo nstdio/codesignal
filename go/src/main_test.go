@@ -25,3 +25,16 @@ func TestLongestUncorruptedSegment(t *testing.T) {
 	assert.Equal(t, []int{7, 3}, longestUncorruptedSegment([]int{20800440, 98256958, 64277103, 40475664, 98589505, 31621824, 84322264, 58283379, 15631261, 35464021}, []int{20800440, 95256958, 64276103, 40475664, 98589505, 31621824, 84322264, 58283379, 15631261, 35464021}))
 	assert.Equal(t, []int{4, 6}, longestUncorruptedSegment([]int{99919628, 77504204, 18846830, 86785029, 86230362, 96953294, 53208680, 95327090, 68996760, 26366538, 90490275, 62583792, 87514087, 96921389, 21309822}, []int{99919628, 77503204, 18546830, 86785029, 86230362, 96953264, 53208680, 95327090, 68996760, 26366538, 90420275, 62583792, 87514087, 39692139, 21303822}))
 }
+
+func TestExtractEachKth(t *testing.T) {
+	testData := []struct {
+		expected, input []int
+		k               int
+	}{
+		{[]int{1, 2, 4, 5, 7, 8, 10}, []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, 3},
+	}
+
+	for _, test := range testData {
+		assert.Equal(t, test.expected, extractEachKth(test.input, test.k))
+	}
+}
