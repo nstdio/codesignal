@@ -320,8 +320,14 @@ public class CoreTest {
 
     @Test
     void stringsRearrangement() {
-        assertFalse(Core.stringsRearrangement(new String[] {"aba", "bbb", "bab"}));
+        assertFalse(Core.stringsRearrangement(new String[]{"aba", "bbb", "bab"}));
 
-        assertTrue(Core.stringsRearrangement(new String[] {"ab", "bb", "aa"}));
+        assertTrue(Core.stringsRearrangement(new String[]{"ab", "bb", "aa"}));
+    }
+
+    @Test
+    void extractEachKth() {
+        assertThat(Core.extractEachKth(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, 3))
+                .isEqualTo(new int[]{1, 2, 4, 5, 7, 8, 10});
     }
 }

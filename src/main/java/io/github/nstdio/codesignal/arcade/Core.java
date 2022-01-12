@@ -798,4 +798,16 @@ public class Core {
 
         return true;
     }
+
+    /**
+     * Given array of integers, remove each kth element from it.
+     *
+     * @param in
+     * @param k
+     *
+     * @return in without elements k - 1, 2k - 1, 3k - 1 etc.
+     */
+    public static int[] extractEachKth(int[] in, int k) {
+        return IntStream.rangeClosed(1, in.length).filter(i -> i % k != 0).map(i -> in[i - 1]).toArray();
+    }
 }
