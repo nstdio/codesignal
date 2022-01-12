@@ -82,3 +82,16 @@ func firstDigit(input string) string {
 	}
 	return ""
 }
+
+func differentSymbolsNaive(s string) int {
+	table := [26]bool{}
+	cnt := 0
+	for _, c := range s {
+		if !table[c-97] {
+			cnt++
+			table[c-97] = true
+		}
+	}
+
+	return cnt
+}

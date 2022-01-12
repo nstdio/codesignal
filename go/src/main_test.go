@@ -48,3 +48,16 @@ func TestFirstDigit(t *testing.T) {
 		assert.Equal(t, test.expected, firstDigit(test.input))
 	}
 }
+
+func TestDifferentSymbolsNaive(t *testing.T) {
+	data := []struct {
+		expected int
+		input    string
+	}{
+		{1, "ccccccccccc"},
+	}
+
+	for _, test := range data {
+		assert.Equal(t, test.expected, differentSymbolsNaive(test.input))
+	}
+}
