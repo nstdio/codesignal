@@ -61,3 +61,19 @@ func TestDifferentSymbolsNaive(t *testing.T) {
 		assert.Equal(t, test.expected, differentSymbolsNaive(test.input))
 	}
 }
+
+func TestArrayMaxConsecutiveSum(t *testing.T) {
+	data := []struct {
+		expected int
+		input    []int
+		k        int
+	}{
+		{9, []int{1, 3, 2, 4}, 3},
+		{8, []int{2, 3, 5, 1, 6}, 2},
+		{14, []int{2, 4, 10, 1}, 2},
+	}
+
+	for _, test := range data {
+		assert.Equal(t, test.expected, arrayMaxConsecutiveSum(test.input, test.k))
+	}
+}

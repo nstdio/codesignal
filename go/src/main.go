@@ -95,3 +95,18 @@ func differentSymbolsNaive(s string) int {
 
 	return cnt
 }
+
+func arrayMaxConsecutiveSum(input []int, k int) int {
+	max := 0
+	for i := 0; i < len(input); i++ {
+		tmp := 0
+		for j := i; j < i+k && j < len(input); j++ {
+			tmp += input[j]
+		}
+		if tmp > max {
+			max = tmp
+		}
+	}
+
+	return max
+}
