@@ -317,4 +317,11 @@ public class CoreTest {
         assertEquals(2, Core.circleOfNumbers(10, 7));
         assertEquals(3, Core.circleOfNumbers(4, 1));
     }
+
+    @Test
+    void stringsRearrangement() {
+        assertFalse(Core.stringsRearrangement(new String[] {"aba", "bbb", "bab"}));
+
+        assertTrue(Core.stringsRearrangement(new String[] {"ab", "bb", "aa"}));
+    }
 }

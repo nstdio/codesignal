@@ -736,4 +736,66 @@ public class Core {
         var i = firstNumber - n / 2;
         return i < 0 ? i + n : i;
     }
+
+    /**
+     * Given an array of equal-length strings, you'd like to know if it's possible to rearrange the order of the
+     * elements in such a way that each consecutive pair of strings differ by exactly one character. Return true if it's
+     * possible, and false if not.
+     * <p>
+     * Note: You're only rearranging the order of the strings, not the order of the letters within the strings!
+     *
+     * @param inputArray A non-empty array of strings of lowercase letters.
+     *
+     * @return Return true if the strings can be reordered in such a way that each neighbouring pair of strings differ
+     * by exactly one character (false otherwise).
+     */
+    public static boolean stringsRearrangement(String[] inputArray) {
+        if (checkDistance(inputArray)) {
+            return true;
+        }
+
+        int n = inputArray.length;
+        int[] indexes = new int[n];
+
+        int i = 0;
+        while (i < n) {
+            if (indexes[i] < i) {
+                int j = i % 2 == 0 ? 0 : indexes[i];
+                String tmp = inputArray[j];
+                inputArray[j] = inputArray[i];
+                inputArray[i] = tmp;
+
+                if (checkDistance(inputArray)) {
+                    return true;
+                }
+                indexes[i]++;
+                i = 0;
+            } else {
+                indexes[i] = 0;
+                i++;
+            }
+        }
+
+        return false;
+    }
+
+    private static boolean checkDistance(String[] input) {
+        for (int i = 1; i < input.length; i++) {
+            var a = input[i - 1];
+            var b = input[i];
+
+            int distance = 0;
+            for (int j = 0; j < a.length(); j++) {
+                if (a.charAt(j) != b.charAt(j)) {
+                    distance++;
+                }
+            }
+
+            if (distance != 1) {
+                return false;
+            }
+        }
+
+        return true;
+    }
 }
