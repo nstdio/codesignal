@@ -2,6 +2,7 @@ package main
 
 import (
 	"math"
+	"unicode"
 )
 
 func main() {
@@ -71,4 +72,13 @@ func extractEachKth(inputArray []int, k int) []int {
 	}
 
 	return ret
+}
+
+func firstDigit(input string) string {
+	for _, c := range input {
+		if unicode.IsDigit(c) {
+			return string(c)
+		}
+	}
+	return ""
 }

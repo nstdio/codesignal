@@ -38,3 +38,13 @@ func TestExtractEachKth(t *testing.T) {
 		assert.Equal(t, test.expected, extractEachKth(test.input, test.k))
 	}
 }
+
+func TestFirstDigit(t *testing.T) {
+	data := []struct{ expected, input string }{
+		{"1", "var_1__Int"},
+	}
+
+	for _, test := range data {
+		assert.Equal(t, test.expected, firstDigit(test.input))
+	}
+}
