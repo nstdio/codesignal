@@ -2,6 +2,7 @@ package main
 
 import (
 	"math"
+	"sort"
 	"unicode"
 )
 
@@ -109,4 +110,42 @@ func arrayMaxConsecutiveSum(input []int, k int) int {
 	}
 
 	return max
+}
+
+func coverDebts(s int, debts []int, interests []int) float64 {
+	type debt struct {
+		value    float64
+		interest float64
+	}
+	debtsToUse := make([]*debt, 0, len(debts))
+	for i := 0; i < len(debts); i++ {
+		debtsToUse = append(debtsToUse, &debt{float64(debts[i]), float64(interests[i])})
+	}
+	sort.Slice(debtsToUse, func(i, j int) bool {
+		return debtsToUse[i].interest > debtsToUse[j].interest
+	})
+
+	total := 0.0
+	skipped := 0
+	for skipped != len(debtsToUse) {
+		spend := 0.1 * float64(s)
+		skipped = 0
+		for _, debt := range debtsToUse {
+			if debt.value != 0 {
+				if spend > 0 {
+					leftSpend := math.Max(spend-debt.value, 0.0)
+
+					debt.value = math.Max(debt.value-spend, 0.0)
+					total += spend - leftSpend
+					spend = leftSpend
+				}
+
+				debt.value += debt.value * (debt.interest / 100.0)
+			} else {
+				skipped++
+			}
+		}
+	}
+
+	return total
 }

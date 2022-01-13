@@ -77,3 +77,17 @@ func TestArrayMaxConsecutiveSum(t *testing.T) {
 		assert.Equal(t, test.expected, arrayMaxConsecutiveSum(test.input, test.k))
 	}
 }
+
+func TestCoverDebts(t *testing.T) {
+	tests := []struct {
+		s                int
+		debts, interests []int
+		expected         float64
+	}{
+		{50, []int{2, 2, 5}, []int{200, 100, 150}, 22},
+	}
+
+	for _, test := range tests {
+		assert.Equal(t, test.expected, coverDebts(test.s, test.debts, test.interests))
+	}
+}
