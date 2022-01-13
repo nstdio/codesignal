@@ -157,7 +157,7 @@ func salesLeadsScore(names []string, time, netValue []int, isOnVacation []bool) 
 		score float64
 	}
 
-	leds := []salesLead{}
+	var leds []salesLead
 
 	for i := 0; i < len(names); i++ {
 		if !isOnVacation[i] {
