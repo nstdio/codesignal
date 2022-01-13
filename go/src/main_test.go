@@ -91,3 +91,19 @@ func TestCoverDebts(t *testing.T) {
 		assert.Equal(t, test.expected, coverDebts(test.s, test.debts, test.interests))
 	}
 }
+
+func TestSalesLeadsScore(t *testing.T) {
+	tests := []struct {
+		names          []string
+		time, netValue []int
+		onVocations    []bool
+		expected       []string
+	}{
+		{[]string{"lead1", "lead2", "lead3", "lead4", "lead5"}, []int{0, 300, 300, 250, 300}, []int{200, 800, 1000, 1000, 800}, []bool{false, false, false, false, false}, []string{"lead3", "lead4", "lead2", "lead5", "lead1"}},
+		{[]string{"lead1", "lead2", "lead3", "lead4", "lead5"}, []int{250, 300, 250, 260, 310}, []int{1000, 800, 1100, 1200, 1000}, []bool{true, false, true, false, false}, []string{"lead4", "lead5", "lead2"}},
+	}
+
+	for _, test := range tests {
+		assert.Equal(t, test.expected, salesLeadsScore(test.names, test.time, test.netValue, test.onVocations))
+	}
+}

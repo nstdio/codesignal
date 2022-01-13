@@ -149,3 +149,44 @@ func coverDebts(s int, debts []int, interests []int) float64 {
 
 	return total
 }
+
+func salesLeadsScore(names []string, time, netValue []int, isOnVacation []bool) []string {
+	type salesLead struct {
+		name  string
+		time  int
+		score float64
+	}
+
+	leds := []salesLead{}
+
+	for i := 0; i < len(names); i++ {
+		if !isOnVacation[i] {
+			leds = append(leds, salesLead{
+				name:  names[i],
+				time:  time[i],
+				score: float64(netValue[i]*time[i]) / 365.0,
+			})
+		}
+	}
+
+	sort.Slice(leds, func(i, j int) bool {
+		l1 := leds[i]
+		l2 := leds[j]
+		if l1.score == l2.score {
+			if l1.time == l2.time {
+				return l1.name < l2.name
+			} else {
+				return l1.time > l2.time
+			}
+		} else {
+			return l1.score > l2.score
+		}
+	})
+
+	ret := make([]string, 0, len(leds))
+	for _, l := range leds {
+		ret = append(ret, l.name)
+	}
+
+	return ret
+}
