@@ -107,3 +107,20 @@ func TestSalesLeadsScore(t *testing.T) {
 		assert.Equal(t, test.expected, salesLeadsScore(test.names, test.time, test.netValue, test.onVocations))
 	}
 }
+
+func TestGrowingPlant(t *testing.T) {
+	tests := []struct {
+		upSpeed, downSpeed, desiredHeight int
+		expected                          int
+	}{
+		{6, 5, 7, 2},
+		{6, 5, 10, 5},
+		{100, 10, 910, 10},
+		{10, 9, 4, 1},
+		{5, 2, 7, 2},
+	}
+
+	for _, test := range tests {
+		assert.Equal(t, test.expected, growingPlant(test.upSpeed, test.downSpeed, test.desiredHeight))
+	}
+}

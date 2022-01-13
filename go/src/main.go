@@ -190,3 +190,14 @@ func salesLeadsScore(names []string, time, netValue []int, isOnVacation []bool) 
 
 	return ret
 }
+
+func growingPlant(upSpeed int, downSpeed int, desiredHeight int) (i int) {
+	h := 0
+	for ; ; i++ {
+		h += upSpeed
+		if h >= desiredHeight {
+			return i
+		}
+		h -= downSpeed
+	}
+}
