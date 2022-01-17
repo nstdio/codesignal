@@ -12,8 +12,9 @@ import java.util.stream.Stream;
 class ListNodeTest {
 
     private static <T> ListNode<T> nodeAt(int index, ListNode<T> head) {
-        for (; index > 0 && head != null; index--, head = head.next) {
-
+        while (index > 0 && head != null) {
+            index--;
+            head = head.next;
         }
 
         return head;
