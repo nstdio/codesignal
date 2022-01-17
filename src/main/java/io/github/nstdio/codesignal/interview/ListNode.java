@@ -20,19 +20,44 @@ class ListNode<T> {
         return head;
     }
 
+    private ListNode<T> findLoop() {
+        ListNode<T> slow = this, fast = this, prevFast;
+
+        while (slow != null && fast != null && fast.next != null) {
+            slow = slow.next;
+            prevFast = fast;
+            fast = fast.next.next;
+            if (slow == fast) {
+                return fast == this
+                        ? prevFast.next
+                        : prevFast == this ? fast.next : prevFast;
+            }
+        }
+
+        return null;
+    }
+
     @Override
     public String toString() {
+        var start = findLoop();
+        var end = start != null ? start.next : null;
+
         StringBuilder sb = new StringBuilder();
         sb.append('[');
 
         ListNode<T> cur = this;
 
+        int hitEnd = 0;
         while (cur != null) {
-            sb.append(cur.value);
+            if (cur == end && ++hitEnd == 2) {
+                break;
+            }
+
+            sb.append(cur.value).append(cur == end || cur == start ? "{L}" : "");
 
             cur = cur.next;
 
-            if (cur != null) {
+            if (cur != null && (cur != end || hitEnd != 1)) {
                 sb.append(", ");
             }
         }
