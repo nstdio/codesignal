@@ -172,8 +172,8 @@ public class LinkedLists {
             cur = temp;
         }
         start.next = prev;
-        return startNext;
 
+        return startNext;
     }
 
     /**
