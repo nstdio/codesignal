@@ -44,12 +44,16 @@ class ListNodeTest {
         var n5 = ListNode.of(0);
         n5.next = n5;
 
+        var n6 = ListNode.of(0, 1, 2, 3, 4, 5, 6, 7, 8);
+        nodeAt(8, n6).next = nodeAt(8, n6);
+
         return Stream.of(
                 arguments(n1, "[0, 1, 2, 3, 4, 5, 6, 7{L}, 8{L}]"),
                 arguments(n2, "[0{L}, 1, 2, 3, 4, 5, 6, 7, 8{L}]"),
                 arguments(n3, "[0{L}, 1{L}]"),
                 arguments(n4, "[0, 1, 2, 3, 4{L}, 5, 6, 7, 8{L}]"),
-                arguments(n5, "[0{L}]")
+                arguments(n5, "[0{L}]"),
+                arguments(n6, "[0, 1, 2, 3, 4, 5, 6, 7, 8{L}]")
         );
     }
 
