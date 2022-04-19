@@ -43,4 +43,27 @@ class ProblemsTest {
     //then
     assertEquals(expected, actual);
   }
+
+  @ParameterizedTest
+  @CsvSource(value = {
+      "I,1",
+      "II,2",
+      "III,3",
+      "IV,4",
+      "V,5",
+      "VI,6",
+      "VII,7",
+      "VIII,8",
+      "IX,9",
+      "X,10",
+      "MCMXCIV,1994",
+      "LVIII,58",
+  })
+  void romainToIn(String input, int expected) {
+    //when
+    int actual = Problems.romanToInt(input);
+
+    //then
+    assertEquals(expected, actual);
+  }
 }

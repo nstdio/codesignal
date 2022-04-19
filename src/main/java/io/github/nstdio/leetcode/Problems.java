@@ -47,4 +47,32 @@ public class Problems {
 
     return r;
   }
+
+  public static int romanToInt(String s) {
+    int n = 0;
+    int len = s.length();
+    int p = Integer.MAX_VALUE;
+    for (int i = 0; i < len; i++) {
+      int v = 0;
+
+      //@formatter:off
+      switch (s.charAt(i)) {
+        case 'I': v=1;break;
+        case 'V': v=5;break;
+        case 'X': v=10;break;
+        case 'L': v=50;break;
+        case 'C': v=100;break;
+        case 'D': v=500;break;
+        case 'M': v=1000;break;
+      }
+      //@formatter:on
+
+      if (p < v) v -= p * 2;
+      n += v;
+      p = v;
+    }
+
+    return n;
+  }
+
 }
