@@ -67,12 +67,30 @@ public class Problems {
       }
       //@formatter:on
 
-      if (p < v) v -= p * 2;
+      if (p < v)
+        v -= p * 2;
       n += v;
       p = v;
     }
 
     return n;
+  }
+
+  public static String intToRoman(int n) {
+    String[] romans = {"I", "IV", "V", "IX", "X", "XL", "L", "XC", "C", "CD", "D", "CM", "M"};
+    int[] value = {1, 4, 5, 9, 10, 40, 50, 90, 100, 400, 500, 900, 1000};
+    int i = romans.length - 1;
+    var ret = new StringBuilder();
+
+    while (n > 0) {
+      while (value[i] <= n) {
+        ret.append(romans[i]);
+        n -= value[i];
+      }
+      i--;
+    }
+
+    return ret.toString();
   }
 
 }
