@@ -66,7 +66,7 @@ class ProblemsTest {
     //then
     assertEquals(expected, actual);
   }
-  
+
   @ParameterizedTest
   @CsvSource(value = {
       "CXXII,122",
