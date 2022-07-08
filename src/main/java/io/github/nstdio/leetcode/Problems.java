@@ -93,4 +93,19 @@ public class Problems {
     return ret.toString();
   }
 
+  public static boolean isMatch(String i, String p) {
+    if (p.isEmpty()) {
+      return i.isEmpty();
+    }
+
+    boolean isCharMatched = !i.isEmpty() && (p.charAt(0) == '.' || i.charAt(0) == p.charAt(0));
+    if (p.length() > 1 && p.charAt(1) == '*') {
+      if (isMatch(i, p.substring(2))) {
+        return true;
+      }
+      return isCharMatched && isMatch(i.substring(1), p);
+    } else {
+      return isCharMatched && isMatch(i.substring(1), p.substring(1));
+    }
+  }
 }
