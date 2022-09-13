@@ -108,4 +108,15 @@ public class Problems {
       return isCharMatched && isMatch(i.substring(1), p.substring(1));
     }
   }
+
+  public static int minPartitions(String n) {
+    int p = 0;
+    for (int i = 0; i < n.length(); i++) {
+      int val = n.charAt(i) - '0';
+      if (val > p)
+        p = val;
+    }
+    
+    return p;
+  }
 }

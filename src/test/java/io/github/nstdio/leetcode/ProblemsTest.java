@@ -143,4 +143,20 @@ class ProblemsTest {
     //then
     assertEquals(expected, actual, () -> "input: %s, pattern: %s, expected: %s".formatted(input, pattern, expected));
   }
+
+  @ParameterizedTest
+  @CsvSource(value = {
+      "11,1",
+      "9,9",
+      "8,8",
+      "32,3",
+      "27346209830709182346,9",
+  })
+  void minPartitions(String input, int expected) {
+    //when
+    var actual = Problems.minPartitions(input);
+
+    //then
+    assertEquals(expected, actual, () -> "input: %s, expected: %d, actual: %d".formatted(input, expected, actual));
+  }
 }
