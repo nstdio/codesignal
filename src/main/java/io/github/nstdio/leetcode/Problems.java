@@ -113,8 +113,11 @@ public class Problems {
     int p = 0;
     for (int i = 0; i < n.length(); i++) {
       int val = n.charAt(i) - '0';
-      if (val > p)
+      if (val == 9) {
+        return 9;
+      } else if (val > p) {
         p = val;
+      }
     }
     
     return p;
