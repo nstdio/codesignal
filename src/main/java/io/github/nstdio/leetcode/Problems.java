@@ -1,16 +1,19 @@
 package io.github.nstdio.leetcode;
 
 public class Problems {
+
   /**
    * https://leetcode.com/problems/string-to-integer-atoi/
    */
   public static int atoi(String s) {
     int len = s.length();
     int i = 0;
-    while (i < len && s.charAt(i++) == ' ') {} // skip whitespaces
+    while (i < len && s.charAt(i++) == ' ') {
+    } // skip whitespaces
 
-    if (i == len)
+    if (i == len) {
       return 0;
+    }
 
     boolean negative = false;
     char sch = s.charAt(i);
@@ -25,7 +28,9 @@ public class Problems {
       num = (num * 10) + (c - 48);
       if (num > Integer.MAX_VALUE) {
         num = Integer.MAX_VALUE;
-        if (negative) num += 1;
+        if (negative) {
+          num += 1;
+        }
         break;
       }
     }
@@ -39,7 +44,9 @@ public class Problems {
     int lo = Integer.MIN_VALUE / 10;
 
     while (x != 0) {
-      if (r > hi || r < lo) return 0;
+      if (r > hi || r < lo) {
+        return 0;
+      }
 
       r = (r * 10) + x % 10;
       x /= 10;
@@ -67,8 +74,9 @@ public class Problems {
       }
       //@formatter:on
 
-      if (p < v)
+      if (p < v) {
         v -= p * 2;
+      }
       n += v;
       p = v;
     }
@@ -119,7 +127,32 @@ public class Problems {
         p = val;
       }
     }
-    
+
     return p;
+  }
+
+  /**
+   * <a href="https://leetcode.com/problems/longest-common-prefix/">...</a>
+   */
+  public static String longestCommonPrefix(String[] strs) {
+    var str1 = strs[0];
+    var k = strs.length > 1 ? 0 : str1.length();
+    
+    for (int i = 1; i < strs.length; i++) {
+      int j = 0;
+      for (; j < Math.min(str1.length(), strs[i].length()); j++) {
+        if (str1.charAt(j) != strs[i].charAt(j)) {
+          if (j == 0) {
+            return "";
+          }
+
+          break;
+        }
+      }
+
+      k = k == 0 ? j : Math.min(k, j);
+    }
+
+    return str1.substring(0, k);
   }
 }

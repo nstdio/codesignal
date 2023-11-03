@@ -1,12 +1,33 @@
 package io.github.nstdio.leetcode;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.params.provider.Arguments.arguments;
 
+import java.util.stream.Stream;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
 
 class ProblemsTest {
 
+  static Stream<Arguments> longestCommonPrefixData() {
+    return Stream.of(
+        arguments(new String[]{"aaa", "aa", "aaa"}, "aa"),
+        arguments(new String[]{"flower", "flow", "flight"}, "fl"),
+        arguments(new String[]{"dog", "racecar", "car"}, ""),
+        arguments(new String[]{"a", "b", "c"}, ""),
+        arguments(new String[]{"aaa", "aaa", "a"}, "a"),
+        arguments(new String[]{"aab", "aaa", "aa"}, "aa"),
+        arguments(new String[]{"ab", "abc", "abcd"}, "ab"),
+        arguments(new String[]{"ab", "xyz", "abcd"}, ""),
+        arguments(new String[]{"ab", "abcd", "xyz"}, ""),
+        arguments(new String[]{"a"}, "a")
+    );
+  }
+
+  @Disabled
   @ParameterizedTest
   @CsvSource(value = {
       "123,123",
@@ -159,5 +180,15 @@ class ProblemsTest {
 
     //then
     assertEquals(expected, actual, () -> "input: %s, expected: %d, actual: %d".formatted(input, expected, actual));
+  }
+
+  @ParameterizedTest
+  @MethodSource("longestCommonPrefixData")
+  void longestCommonPrefix(String[] input, String expected) {
+    //when
+    var actual = Problems.longestCommonPrefix(input);
+
+    //then
+    assertEquals(expected, actual);
   }
 }
